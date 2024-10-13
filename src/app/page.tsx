@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useMemo } from "react";
-import { ConnectButton } from "@/components/Wallet";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { deployedContract } from "@/constants/deployedContract";
 import { useState } from "react";
@@ -21,11 +20,14 @@ import apes from '../assets/apes.png'
 import send from '../assets/send.png'
 import logo from '../assets/logo.png'
 import rec from '../assets/rec.png'
+import { ConnectButton } from "@/components/Wallet";
+import Modal from "@/components/Modal";
 
 
 export default function Home() {
   const [newGreeting, setNewGreeting] = useState("");
   const account = useAccount();
+  const [isModalOpen, setIsModalOpen] = useState(false)
   useEffect(() => {}, []);
   const { data: greeting } = useReadContract({
     address: deployedContract.address as `0x${string}`,
@@ -88,9 +90,12 @@ export default function Home() {
 
        {/* Button and aesthetics */}
      <div className="flex flex-col items-center justify-center mt-6">
-       <button className="px-6 py-2 text-lg text-white transition duration-300 bg-[#0052FF] rounded-full shadow-blue-200 hover:bg-blue-700">
+       <button
+       onClick={() => setIsModalOpen(true)}
+       className="px-6 py-2 text-lg text-white transition duration-300 bg-[#0052FF] rounded-full shadow-blue-200 hover:bg-blue-700">
         Launch Bot
        </button>
+       {isModalOpen && <Modal closeModal={() => setIsModalOpen(false)} />}
        <Image src={vector} width={600} height={600} alt='vector' className="ml-8" />
        <div className="flex -mt-12 ">
         {/* first badge  */}

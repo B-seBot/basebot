@@ -225,8 +225,9 @@ Whether from Discord, Whatsapp or Telegram
     </div>
     
     {/* footer  */}
-    <div className="w-full bg-black">
-      
+    <div className="relative flex flex-col items-center justify-center w-full p-16 bg-black">
+      <Image src={logo} alt='df' className="w-[60%]" />
+      <Image src={rec} alt='sd' className="absolute w-full -bottom-12" />
     </div>
       
     </div>
